@@ -218,7 +218,6 @@ This server provides tools for interacting with an SAP system via ADT (ABAP Deve
 *   **Lock Handle:**  The `lockHandle` obtained from the `lock` operation is crucial for `setObjectSource` and `unLock`. Ensure you are using a valid `lockHandle`. If a lock fails, you may need to re-acquire the lock. Locks can expire or be released by other users.
 *   **Activation/Unlocking Order:** The exact order of `activate` and `unLock` operations might need clarification. Refer to the tool descriptions or ask the user. It appears `activate` can be used without unlocking first.
 * **Error Handling:** The tools return JSON responses. Check for error messages within these responses.
-```
 
 ## Efficient Database Access
 
@@ -241,7 +240,7 @@ When working with ABAP objects, you may encounter errors related to unknown fiel
 *   **`ddicRepositoryAccess`:** Reads DDIC repository information for a given path.
 *   **`tableContents`:** Retrieves the *contents* (rows) of a table, not its definition. Use `runQuery` for ad-hoc `SELECT`s.
 
-> **Note:** Earlier versions of this README listed `GetTable`, `GetStructure`, and `GetTypeInfo`. Those tools are **not** part of this server — they belong to the separate [`mcp-abap-adt`](https://github.com/mario-andreschak/mcp-abap-adt) project. This server (`mcp-abap-abap-adt-api`) exposes the lower-level ADT API tools listed above instead.
+```
 
 ## Troubleshooting
 
