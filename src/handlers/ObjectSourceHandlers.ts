@@ -1,107 +1,118 @@
-import { McpError, ErrorCode } from "@modelcontextprotocol/sdk/types.js";
-import { BaseHandler } from './BaseHandler';
-import type { ToolDefinition } from '../types/tools';
+import { stringify } from "../lib/results.js";
+import { McpError, ErrorCode } from "../lib/errors.js";
+import { BaseHandler } from "./BaseHandler.js";
+import type { ToolDefinition } from "../types/tools.js";
 import { session_types } from "abap-adt-api";
-import { sourceCache } from '../lib/sourceCache';
 
 export class ObjectSourceHandlers extends BaseHandler {
   getTools(): ToolDefinition[] {
     return [
       {
-        name: 'getObjectSource',
-        description: 'Retrieves source code for ABAP objects. For large objects, use startLine/maxLines to page through the source instead of retrieving it all at once.',
+        name: "getObjectSource",
+        description:
+          "Retrieves source code for ABAP objects. For large objects, use startLine/maxLines to page through the source instead of retrieving it all at once.",
         inputSchema: {
-          type: 'object',
+          type: "object",
           properties: {
-            objectSourceUrl: { type: 'string' },
-            options: { type: 'string' },
+            objectSourceUrl: { type: "string" },
+            options: { type: "string" },
             startLine: {
-              type: 'number',
-              description: '1-based line number to start from (default 1). Use with maxLines to page through large sources.',
-              optional: true
+              type: "number",
+              description:
+                "1-based line number to start from (default 1). Use with maxLines to page through large sources.",
+              optional: true,
             },
             maxLines: {
-              type: 'number',
-              description: 'Maximum number of lines to return from startLine. Omit to return the rest of the source.',
-              optional: true
-            }
+              type: "number",
+              description:
+                "Maximum number of lines to return from startLine. Omit to return the rest of the source.",
+              optional: true,
+            },
           },
-          required: ['objectSourceUrl']
-        }
+          required: ["objectSourceUrl"],
+        },
       },
       {
-        name: 'setObjectSource',
-        description: 'Sets source code for ABAP objects',
+        name: "setObjectSource",
+        description: "Sets source code for ABAP objects",
         inputSchema: {
-          type: 'object',
+          type: "object",
           properties: {
-            objectSourceUrl: { type: 'string' },
-            source: { type: 'string' },
-            lockHandle: { type: 'string' },
-            transport: { type: 'string' }
+            objectSourceUrl: { type: "string" },
+            source: { type: "string" },
+            lockHandle: { type: "string" },
+            transport: { type: "string" },
           },
-          required: ['objectSourceUrl', 'source', 'lockHandle']
-        }
-      }
+          required: ["objectSourceUrl", "source", "lockHandle"],
+        },
+      },
     ];
   }
 
   async handle(toolName: string, args: any): Promise<any> {
     switch (toolName) {
-      case 'getObjectSource':
+      case "getObjectSource":
         return this.handleGetObjectSource(args);
-      case 'setObjectSource':
+      case "setObjectSource":
         return this.handleSetObjectSource(args);
       default:
-        throw new McpError(ErrorCode.MethodNotFound, `Unknown object source tool: ${toolName}`);
+        throw new McpError(
+          ErrorCode.MethodNotFound,
+          `Unknown object source tool: ${toolName}`,
+        );
     }
   }
 
   async handleGetObjectSource(args: any): Promise<any> {
-    
     const startTime = performance.now();
     try {
-      const fullSource = await this.adtclient.getObjectSource(args.objectSourceUrl, args.options);
+      const fullSource = await this.adtclient.getObjectSource(
+        args.objectSourceUrl,
+        args.options,
+      );
       // Remember the source so a later syntaxCheckCode on the same URL can reuse
       // it without the caller re-sending it (issue #2).
-      sourceCache.set(args.objectSourceUrl, fullSource);
+      this.sourceCache.set(args.objectSourceUrl, fullSource);
       this.trackRequest(startTime, true);
 
-      const lines = fullSource.split('\n');
+      const lines = fullSource.split("\n");
       const totalLines = lines.length;
 
       // Optional pagination for large sources (issue #4). When neither
       // parameter is provided, behaviour is unchanged: the whole source is returned.
-      const hasPaging = args.startLine !== undefined || args.maxLines !== undefined;
+      const hasPaging =
+        args.startLine !== undefined || args.maxLines !== undefined;
       const startLine = Math.max(1, Number(args.startLine) || 1);
       const startIndex = startLine - 1;
-      const endIndex = args.maxLines !== undefined
-        ? startIndex + Math.max(0, Number(args.maxLines))
+      const endIndex =
+        args.maxLines !== undefined
+          ? startIndex + Math.max(0, Number(args.maxLines))
+          : totalLines;
+      const source = hasPaging
+        ? lines.slice(startIndex, endIndex).join("\n")
+        : fullSource;
+      const returnedLines = hasPaging
+        ? Math.min(endIndex, totalLines) - startIndex
         : totalLines;
-      const source = hasPaging ? lines.slice(startIndex, endIndex).join('\n') : fullSource;
-      const returnedLines = hasPaging ? Math.min(endIndex, totalLines) - startIndex : totalLines;
 
       return {
         content: [
           {
-            type: 'text',
-            text: JSON.stringify({
-              status: 'success',
+            type: "text",
+            text: stringify({
+              status: "success",
               source,
               totalLines,
               startLine: hasPaging ? startLine : 1,
               returnedLines: Math.max(0, returnedLines),
-              hasMore: hasPaging ? endIndex < totalLines : false
-            })
-          }
-        ]
+              hasMore: hasPaging ? endIndex < totalLines : false,
+            }),
+          },
+        ],
       };
     } catch (error: any) {
       this.trackRequest(startTime, false);
-      throw new McpError(
-        ErrorCode.InternalError,
-        `Failed to get object source: ${error.message || 'Unknown error'}`
-      );
+      throw error;
     }
   }
 
@@ -114,29 +125,26 @@ export class ObjectSourceHandlers extends BaseHandler {
         args.objectSourceUrl,
         args.source,
         args.lockHandle,
-        args.transport
+        args.transport,
       );
       // Cache the just-written source so a follow-up syntaxCheckCode can reuse it
       // without the caller re-sending it (issue #2).
-      sourceCache.set(args.objectSourceUrl, args.source);
+      this.sourceCache.set(args.objectSourceUrl, args.source);
       this.trackRequest(startTime, true);
       return {
         content: [
           {
-            type: 'text',
-            text: JSON.stringify({
-              status: 'success',
-              updated: true
-            })
-          }
-        ]
+            type: "text",
+            text: stringify({
+              status: "success",
+              updated: true,
+            }),
+          },
+        ],
       };
     } catch (error: any) {
       this.trackRequest(startTime, false);
-      throw new McpError(
-        ErrorCode.InternalError,
-        `Failed to set object source: ${error.message || 'Unknown error'}`
-      );
+      throw error;
     }
   }
 }

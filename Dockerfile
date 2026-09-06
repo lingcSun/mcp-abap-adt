@@ -1,34 +1,16 @@
-# Use an official Node.js runtime as a parent image
-FROM node:18-alpine AS builder
-
-# Set the working directory
-WORKDIR /app
-
-# Copy the package files
+FROM node:22-bookworm-slim AS build
+WORKDIR /build
 COPY package.json package-lock.json ./
-
-# Install dependencies
-RUN npm install
-
-# Copy the rest of the application code
-COPY . .
-
-# Build the TypeScript application
+RUN npm ci
+COPY tsconfig.json ./
+COPY src ./src
 RUN npm run build
-
-# Use a smaller Node.js runtime for the production build
-FROM node:18-alpine AS runner
-
-# Set the working directory
+FROM node:22-bookworm-slim
+ENV NODE_ENV=production
 WORKDIR /app
-
-# Copy the built application from the builder stage
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/node_modules ./node_modules
-
-# Expose port (if applicable, specify the port that your server listens on)
-EXPOSE 3000
-
-# Command to run the application
-CMD ["node", "./dist/index.js"]
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev --ignore-scripts && npm cache clean --force
+COPY --from=build /build/dist ./dist
+COPY README.md LICENSE ./
+USER node
+CMD ["node", "dist/index.js"]

@@ -1,0 +1,35 @@
+name: MCP runtime and artifacts
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [22, 24]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      - run: npm run verify:stdio
+      - run: npm run verify:package
+      - run: npm audit
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm ci
+      - run: docker build -t mcp-abap-api .
+      - run: node scripts/verify-stdio.mjs --offline docker run --rm -i --network none mcp-abap-api
+      - run: test "$(docker run --rm --network none --entrypoint id mcp-abap-api -u)" = "1000"
