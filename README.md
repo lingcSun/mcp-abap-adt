@@ -1,75 +1,21 @@
-DISCLAIMER: This server is still in experimental status! Use it with caution!
+# ABAP ADT API MCP server
 
-# ABAP-ADT-API MCP-Server
+This server preserves 127 existing SAP ABAP tools and adds `readResultPage` for large results. Object CRUD, locking, activation, transports, queries, debugging, refactoring, Git and analysis share one SAP session owned by a trusted local stdio client. SAP authorizations determine what that session can read or change.
 
-## Description
+## Installation and protocol
 
-The MCP-Server `mcp-abap-abap-adt-api` is a Model Context Protocol (MCP) server designed to facilitate seamless communication between ABAP systems and MCP clients. It is a wrapper for [abap-adt-api](https://github.com/marcellourbani/abap-adt-api/) and provides a suite of tools and resources for managing ABAP objects, handling transport requests, performing code analysis, and more, enhancing the efficiency and effectiveness of ABAP development workflows.
-
-The server is published on npm as [`mcp-abap-abap-adt-api`](https://www.npmjs.com/package/mcp-abap-abap-adt-api) and listed in the [MCP Registry](https://registry.modelcontextprotocol.io) as `io.github.mario-andreschak/mcp-abap-abap-adt-api`, so most MCP clients can install it with a single command (or a single click — see [FLUJO](#integrating-with-flujo-recommended) below).
-
-> **Related project:** For higher-level, read-oriented ABAP tools (`GetProgram`, `GetClass`, `GetTable`, …) see the separate [`mcp-abap-adt`](https://github.com/mario-andreschak/mcp-abap-adt) server. **This** server (`mcp-abap-abap-adt-api`) exposes the lower-level ADT API (lock/unlock, edit source, transports, activation, syntax checks, DDIC access, …) for full read/write development workflows.
-
-## Features
-
-- **Authentication**: Securely authenticate with ABAP systems using the `login` tool.
-- **Object Management**: Create, read, update, and delete ABAP objects seamlessly.
-- **Transport Handling**: Manage transport requests with tools like `createTransport` and `transportInfo`.
-- **Code Analysis**: Perform syntax checks and retrieve code completion suggestions.
-- **Extensibility**: Easily extend the server with additional tools and resources as needed.
-- **Session Management**: Handle session caching and termination using `dropSession` and `logout`.
-
-## Prerequisites
-
-- **An SAP ABAP System** reachable via ADT (ABAP Development Tools). You'll need the system URL, a username and password, and the client number. Ensure the `/sap/bc/adt` service is active in transaction `SICF` (your basis administrator can help).
-- **Node.js and npm** — download the LTS version from [nodejs.org](https://nodejs.org/). Verify with `node -v` and `npm -v`.
-
-## Installation
-
-There are three ways to use this server, from easiest to most manual:
-
-### Integrating with FLUJO (recommended)
-
-[FLUJO](https://github.com/mario-andreschak/FLUJO) is the easiest way to use this server — no cloning, building, or hand-editing JSON config:
-
-1. In FLUJO, navigate to **MCP**.
-2. Click **Add Server**.
-3. On the **Marketplace** tab, search for **`mcp-abap-abap-adt-api`** and select it.
-4. FLUJO fetches the npm package automatically and opens the **Local Server** tab. Enter your SAP **URL**, **User**, **Password** (and optionally client/language), then click **Save**.
-
-That's it — FLUJO downloads and runs the npm package for you and keeps your SAP credentials with the installed server.
-
-#### Streamable HTTP transport (via FLUJO)
-
-`mcp-abap-abap-adt-api` runs over **stdio**. If you need to reach it over **streamable HTTP** — for example from another app on your machine or a client that only speaks HTTP — let FLUJO re-host it: install the server in FLUJO as above, then toggle **"Expose to external apps"** on the server. FLUJO's built-in mcp-proxy then serves it over HTTP at `http://localhost:4200/mcp-proxy/mcp-abap-abap-adt-api`, and any HTTP-capable MCP client can connect with a config like:
+Use Node22.22.2+ or24.15.0+. Run `npm ci` and `npm run build`, then configure your MCP client to launch `node` with the absolute path to `dist/index.js`. Existing npm/registry releases do not contain this PR until the owner releases it. No release is published here.
 
 ```json
 {
   "mcpServers": {
-    "mcp-abap-abap-adt-api": {
-      "type": "http",
-      "url": "http://localhost:4200/mcp-proxy/mcp-abap-abap-adt-api"
-    }
-  }
-}
-```
-
-FLUJO keeps your SAP credentials with the installed server, so the HTTP config itself carries none.
-
-### Quick start with npx (any MCP client)
-
-The server is published on npm, so you don't need to clone or build anything — most MCP clients can launch it directly via `npx`. Add it to your MCP client configuration (e.g. Cline, Claude Desktop, Claude Code):
-
-```json
-{
-  "mcpServers": {
-    "mcp-abap-abap-adt-api": {
-      "command": "npx",
-      "args": ["-y", "mcp-abap-abap-adt-api"],
+    "abap-adt": {
+      "command": "node",
+      "args": ["/absolute/path/mcp-abap-abap-adt-api/dist/index.js"],
       "env": {
-        "SAP_URL": "https://your-sap-server.com:44300",
-        "SAP_USER": "YOUR_SAP_USERNAME",
-        "SAP_PASSWORD": "YOUR_SAP_PASSWORD",
+        "SAP_URL": "https://sap.example.invalid:44300",
+        "SAP_USER": "YOUR_USER",
+        "SAP_PASSWORD": "YOUR_PASSWORD",
         "SAP_CLIENT": "100",
         "SAP_LANGUAGE": "EN"
       }
@@ -78,84 +24,51 @@ The server is published on npm, so you don't need to clone or build anything —
 }
 ```
 
-If your SAP system uses a self-signed certificate, add `"NODE_TLS_REJECT_UNAUTHORIZED": "0"` to the `env` block (development only).
+Public TypeScript MCP2.0.0 supports modern2026-07-28 discovery and legacy2025-11-25 initialization, validated tools, cancellation and proper errors. This package exposes stdio; it is not an HTTP listener or MCP OAuth provider. Missing credentials still allow discovery. `healthcheck` reports local configuration and session recovery state, not verified SAP connectivity.
 
-> **Windows tip:** if `npx` isn't found, set `"command": "npx.cmd"`, or use the full path to `node` with the absolute path to `dist/index.js` from a source install (see below).
+Environment comes from the MCP client. Dotenv loads only when `SAP_ENV_FILE` explicitly names a file. `SAP_URL` is an origin without a path, query or embedded credentials. For a private CA set `NODE_EXTRA_CA_CERTS` before launching Node. TLS verification cannot be disabled. Loopback HTTP is allowed for fixtures; a trusted private HTTP deployment requires `SAP_ALLOW_HTTP=1` and exposes credentials to that network.
 
-### Build from source
+An authorized broker's static `SAP_BEARER_TOKEN` can replace the password. Rotate it by restarting the process; this does not implement XSUAA grants or prove tenant acceptance. No password-grant flow is introduced.
 
-1. **Clone the Repository**
+## Session and limits
 
-   ```cmd
-   git clone https://github.com/mario-andreschak/mcp-abap-abap-adt-api.git
-   cd mcp-abap-abap-adt-api
-   ```
+Only one operation runs at a time; overlaps receive a busy error. Debugger listeners also occupy this session until completed or cancelled. `SAP_REQUEST_TIMEOUT_MS` defaults to60000 and accepts100..120000, including login and every underlying HTTP request. Cancellation closes real sockets. The client does not follow redirects, inherit environment proxies, retry mutations or automatically reauthenticate a stateful call. An interrupted write may already have changed SAP: inspect writes and locks, then explicitly `login`, `dropSession` or `logout` to recover. Shutdown attempts a bounded logout; unreachable SAP can retain state until its own expiry.
 
-2. **Install Dependencies**
+HTTP stays on the configured origin under `/sap/`, with 2MiB requests,4MiB responses and verified TLS. XML entity declarations are rejected. Input JSON is bounded by bytes, nesting, arrays and field contracts. This is a trusted operator tool, not an OS sandbox or multi-user service. Git tools can ask SAP to contact a remote Git service with supplied credentials; those operations depend on SAP and remote permissions.
 
-   ```cmd
-   npm install
-   ```
+Schemas are derived from pinned abap-adt-api8.4.3 declarations, including objects, arrays and overloads. Previously documented JSON strings for object arguments remain accepted, parsed and validated. Unknown top-level arguments are rejected. `scripts/generate-input-contracts.mjs` and its report record the mapping; rerun and review on dependency updates. Its TypeScript6 compiler API is development-only; TypeScript7 builds the application.
 
-3. **Configure Environment Variables**
+Source snapshots from `getObjectSource`/successful `setObjectSource` can feed `syntaxCheckCode` when `code` is omitted (issue#2). The per-runtime cache is limited to8MiB,64entries and five minutes. Mutating/session operations clear old snapshots. Snapshots are the last observed text, not a guarantee against external edits. Explicit empty text is checked as an equivalent blank line because upstream rejects an empty string; results report `emptySourceNormalized`. Source options accept structured or JSON objects, including active/inactive versions. Existing line paging remains available. Class includes fetch class metadata first; a public-request adapter handles valid single-link class XML rejected by the upstream parser. Maps preserve their entries in JSON.
 
-   An `.env.example` file is provided in the root directory as a template for the required environment variables. To set up your environment:
+Above64KiB, results return an opaque `resultId`, a JSON page, `nextOffset` and expiry. Use `readResultPage`, concatenate pages and JSON-parse to recover the original tool result. Paging never repeats SAP requests or writes. At most four 4MiB results live for five minutes; mutations/session resets clear them. Expired results need an intentional repeat of the original read. Larger results fail clearly. Query/search/ATC defaults are100 with caps of1000 where available; an API may return an extra sentinel row. Other large structures use generic paging.
 
-   a. Copy the `.env.example` file and rename it to `.env`:
-      ```bash
-      cp .env.example .env
-      ```
+## Validation and deployment acceptance
 
-   b. Open the `.env` file and replace the placeholder values with your actual SAP connection details:
+```sh
+npm run build
+npm test
+npm run verify:stdio
+npm run verify:package
+npm audit
+docker build -t mcp-abap-api .
+node scripts/verify-stdio.mjs --offline docker run --rm -i --network none mcp-abap-api
+```
 
-      ```env
-      SAP_URL=https://your-sap-server.com:44300
-      SAP_USER=YOUR_SAP_USERNAME
-      SAP_PASSWORD=YOUR_SAP_PASSWORD
-      SAP_CLIENT=YOUR_SAP_CLIENT
-      SAP_LANGUAGE=YOUR_SAP_LANGUAGE
-      ```
+Tests use real local HTTP/XML fixtures and installed modern/legacy protocol exchanges. Linux/Windows Node22/24 and non-root Docker run in CI. No SAP production credentials or writes are used. For an authorized read-only deployment canary set `SAP_LIVE_TEST=1` and optional `SAP_LIVE_SOURCE_URL`, then run `npm run verify:live`. This checks login/discovery/optional source reading, not every SAP write/debug/Git/transport feature. Validate those on a development system. Permissions, credentials, API availability and support through the end of2026 remain deployment checks.
 
-   Note: The SAP_CLIENT and SAP_LANGUAGE variables are optional but recommended.
+Existing PRs19/20/21/22 overlap errors, result sizing, class includes and login; all remain open for owner review. PR15's state restoration and refactoring JSON work already exists on the starting branch. PR10's proposed XSUAA implementation is not merged here.
 
-   If you're using self-signed certificates, you can also set:
+References: [abap-adt-api](https://github.com/marcellourbani/abap-adt-api), [MCP2026-07-28](https://modelcontextprotocol.io/specification/2026-07-28), [Node private CA configuration](https://nodejs.org/api/cli.html#node_extra_ca_certsfile).
 
-   ```env
-   NODE_TLS_REJECT_UNAUTHORIZED="0"
-   ```
+## Existing tool workflow reference
 
-   IMPORTANT: Never commit your `.env` file to version control. It's already included in `.gitignore` to prevent accidental commits.
-
-4. **Build the Project**
-
-   ```cmd
-   npm run build
-   ```
-
-5. **Run the Server**
-
-   ```cmd
-   npm run start
-   ```
-
-   When integrating a source build into an MCP client, point `command` at `node` with an absolute path to the build output:
-
-   ```json
-   {
-     "mcpServers": {
-       "mcp-abap-abap-adt-api": {
-         "command": "node",
-         "args": ["PATH_TO_YOUR/mcp-abap-abap-adt-api/dist/index.js"],
-         "disabled": false,
-         "autoApprove": []
-       }
-     }
-   }
-   ```
+Original workflow examples follow. Runtime, schema and installation behavior above supersedes older client-specific examples.
 
 ## Custom Instruction
+
 Use this Custom Instruction to explain the tool to your model:
-```
+
+````
 ## mcp-abap-abap-adt-api Server
 
 This server provides tools for interacting with an SAP system via ADT (ABAP Development Tools) APIs. It allows you to retrieve information about ABAP objects, modify source code, and manage transports.
@@ -211,7 +124,7 @@ This server provides tools for interacting with an SAP system via ADT (ABAP Deve
 9.  **unLock the object:** Use `unLock`.
 
 **Important Notes:**
-*   **File Handling:** SAP is completly de-coupled from the local file system. Reading source code will only return the code as tool result - it has no effect on file. Files are not synchronized with SAP but merely a local copy for our reference. FYI: It's not strictly necessary for you to create local copies of source codes, as they have no effect on SAP, but it helps us track changes. 
+*   **File Handling:** SAP is completly de-coupled from the local file system. Reading source code will only return the code as tool result - it has no effect on file. Files are not synchronized with SAP but merely a local copy for our reference. FYI: It's not strictly necessary for you to create local copies of source codes, as they have no effect on SAP, but it helps us track changes.
 *   **File Handling:** The local filenames you will use will not contain any paths, but only a filename! It's preferable to use a pattern like "[ObjectName].[ObjectType].abap". (e.g., SAPMV45A.prog.abap for a ABAP Program SAPMV45A, CL_IXML.clas.abap for a Class CL_IXML)
 *   **URL Suffix:**  Remember to add `/source/main` to the object URI when using `setObjectSource` and `getObjectSource`.
 *   **Transport Request:** Obtain the transport request number (e.g., from `transportInfo` or from the user) and include it in relevant operations.
@@ -240,13 +153,13 @@ When working with ABAP objects, you may encounter errors related to unknown fiel
 *   **`ddicRepositoryAccess`:** Reads DDIC repository information for a given path.
 *   **`tableContents`:** Retrieves the *contents* (rows) of a table, not its definition. Use `runQuery` for ad-hoc `SELECT`s.
 
-```
+````
 
 ## Troubleshooting
 
-*   **`npx` can't find the package / client won't start it:** ensure Node.js is installed and on your PATH (`node -v`, `npm -v`). On Windows try `"command": "npx.cmd"`, or use a source build with an absolute path to `node dist/index.js`.
-*   **SAP connection errors:** verify your credentials (`SAP_URL`, `SAP_USER`, `SAP_PASSWORD`, `SAP_CLIENT`), confirm the system is reachable, that your user has ADT authorizations, and that `/sap/bc/adt` is active in `SICF`.
-*   **TLS / self-signed certificate errors:** for development only, set `NODE_TLS_REJECT_UNAUTHORIZED=0` (env var or in the client `env` block).
+- **`npx` can't find the package / client won't start it:** ensure Node.js is installed and on your PATH (`node -v`, `npm -v`). On Windows try `"command": "npx.cmd"`, or use a source build with an absolute path to `node dist/index.js`.
+- **SAP connection errors:** verify your credentials (`SAP_URL`, `SAP_USER`, `SAP_PASSWORD`, `SAP_CLIENT`), confirm the system is reachable, that your user has ADT authorizations, and that `/sap/bc/adt` is active in `SICF`.
+- **TLS / self-signed certificate errors:** configure `NODE_EXTRA_CA_CERTS` with the absolute path to a trusted CA certificate before Node starts. Verification stays enabled.
 
 ## Contributing
 

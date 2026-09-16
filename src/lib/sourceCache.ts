@@ -1,30 +1,46 @@
-/**
- * In-memory cache of ABAP object source, keyed by object source URL.
- *
- * A stdio MCP server serves a single client for the lifetime of the process,
- * so a simple module-level Map is a safe place to remember the source that was
- * last read (getObjectSource) or written (setObjectSource). This lets
- * syntaxCheckCode reuse that source instead of forcing the model to re-send the
- * whole file on every check (issue #2).
- */
-const cache = new Map<string, string>();
-
-export const sourceCache = {
-  set(url: string, source: string): void {
-    if (typeof url === 'string' && url.length > 0 && typeof source === 'string') {
-      cache.set(url, source);
-    }
-  },
-  get(url: string): string | undefined {
-    return cache.get(url);
-  },
-  has(url: string): boolean {
-    return cache.has(url);
-  },
-  delete(url: string): void {
-    cache.delete(url);
-  },
-  clear(): void {
-    cache.clear();
+import { createHash } from "node:crypto";
+export class SourceCache {
+  private entries = new Map<
+    string,
+    { source: string; expires: number; bytes: number }
+  >();
+  private bytes = 0;
+  constructor(
+    private readonly maxBytes = 8 * 1024 * 1024,
+    private readonly ttlMs = 300000,
+    private readonly maxEntries = 64,
+  ) {}
+  set(url: string, source: string) {
+    this.delete(url);
+    const bytes = Buffer.byteLength(source);
+    if (bytes > this.maxBytes) return;
+    this.entries.set(url, { source, bytes, expires: Date.now() + this.ttlMs });
+    this.bytes += bytes;
+    while (this.entries.size > this.maxEntries || this.bytes > this.maxBytes)
+      this.delete(this.entries.keys().next().value!);
   }
-};
+  get(url: string) {
+    const e = this.entries.get(url);
+    if (!e) return;
+    if (e.expires <= Date.now()) {
+      this.delete(url);
+      return;
+    }
+    return e.source;
+  }
+  has(url: string) {
+    return this.get(url) !== undefined;
+  }
+  delete(url: string) {
+    const e = this.entries.get(url);
+    if (e) this.bytes -= e.bytes;
+    this.entries.delete(url);
+  }
+  clear() {
+    this.entries.clear();
+    this.bytes = 0;
+  }
+  static hash(source: string) {
+    return createHash("sha256").update(source).digest("hex");
+  }
+}

@@ -7,16 +7,20 @@
     "mcp-abap-abap-adt-api": "dist/index.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "build": "tsc -p tsconfig.json",
-    "start": "node ./dist/index.js",
-    "dev": "npx @modelcontextprotocol/inspector ./dist/index.js",
-    "prepublishOnly": "npm run build"
+    "build": "tsc",
+    "check": "tsc --noEmit",
+    "test": "tsx --test test/*.test.ts",
+    "start": "node dist/index.js",
+    "prepack": "npm run build",
+    "verify:stdio": "node scripts/verify-stdio.mjs",
+    "verify:package": "node scripts/verify-package.mjs",
+    "verify:live": "node scripts/verify-live.mjs",
+    "contracts": "node scripts/generate-input-contracts.mjs"
   },
   "keywords": [
     "abap",
@@ -41,18 +45,22 @@
     "url": "https://github.com/mario-andreschak/mcp-abap-abap-adt-api/issues"
   },
   "engines": {
-    "node": ">=18"
+    "node": "^22.22.2 || ^24.15.0"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.4.1",
-    "abap-adt-api": "^8.4.1",
-    "dotenv": "^16.4.7"
+    "@modelcontextprotocol/server": "2.0.0",
+    "abap-adt-api": "8.4.3",
+    "dotenv": "17.3.1",
+    "fast-xml-parser": "5.11.1",
+    "zod": "4.5.4"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.14",
-    "@types/node": "^22.10.10",
-    "jest": "^29.7.0",
-    "ts-jest": "^29.2.5",
-    "typescript": "^5.7.3"
-  }
+    "@modelcontextprotocol/client": "2.0.0",
+    "@types/node": "24.13.0",
+    "tsx": "4.23.5",
+    "typescript": "7.0.2",
+    "typescript-api": "npm:typescript@6.0.3"
+  },
+  "type": "module",
+  "packageManager": "npm@10.9.8"
 }

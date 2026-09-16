@@ -1,0 +1,1801 @@
+[
+  {
+    "tool": "atcCheckVariant",
+    "field": "variant",
+    "method": "atcCheckVariant",
+    "parameter": "variant",
+    "type": "string"
+  },
+  {
+    "tool": "createAtcRun",
+    "field": "variant",
+    "method": "createAtcRun",
+    "parameter": "variant",
+    "type": "string"
+  },
+  {
+    "tool": "createAtcRun",
+    "field": "mainUrl",
+    "method": "createAtcRun",
+    "parameter": "mainUrl",
+    "type": "string"
+  },
+  {
+    "tool": "atcWorklists",
+    "field": "runResultId",
+    "method": "atcWorklists",
+    "parameter": "runResultId",
+    "type": "string"
+  },
+  {
+    "tool": "atcWorklists",
+    "field": "includeExempted",
+    "method": "atcWorklists",
+    "parameter": "includeExempted",
+    "type": "boolean | undefined"
+  },
+  {
+    "tool": "atcExemptProposal",
+    "field": "markerId",
+    "method": "atcExemptProposal",
+    "parameter": "markerId",
+    "type": "string"
+  },
+  {
+    "tool": "atcRequestExemption",
+    "field": "proposal",
+    "method": "atcRequestExemption",
+    "parameter": "proposal",
+    "type": "AtcProposal"
+  },
+  {
+    "tool": "isProposalMessage",
+    "field": "proposal",
+    "method": "isProposalMessage",
+    "parameter": "u",
+    "type": "unknown"
+  },
+  {
+    "tool": "atcContactUri",
+    "field": "findingUri",
+    "method": "atcContactUri",
+    "parameter": "findingUri",
+    "type": "string"
+  },
+  {
+    "tool": "atcChangeContact",
+    "field": "itemUri",
+    "method": "atcChangeContact",
+    "parameter": "itemUri",
+    "type": "string"
+  },
+  {
+    "tool": "atcChangeContact",
+    "field": "userId",
+    "method": "atcChangeContact",
+    "parameter": "userId",
+    "type": "string"
+  },
+  {
+    "tool": "classComponents",
+    "field": "url",
+    "method": "classComponents",
+    "parameter": "url",
+    "type": "string"
+  },
+  {
+    "tool": "syntaxCheckCdsUrl",
+    "field": "cdsUrl",
+    "method": "syntaxCheck",
+    "parameter": "cdsUrl",
+    "type": "string"
+  },
+  {
+    "tool": "syntaxCheckCode",
+    "field": "url",
+    "method": "syntaxCheck",
+    "parameter": "url",
+    "type": "string"
+  },
+  {
+    "tool": "syntaxCheckCode",
+    "field": "mainProgram",
+    "method": "syntaxCheck",
+    "parameter": "mainProgram",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "syntaxCheckCode",
+    "field": "version",
+    "method": "syntaxCheck",
+    "parameter": "version",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "codeCompletion",
+    "field": "sourceUrl",
+    "method": "codeCompletion",
+    "parameter": "sourceUrl",
+    "type": "string"
+  },
+  {
+    "tool": "codeCompletion",
+    "field": "source",
+    "method": "codeCompletion",
+    "parameter": "source",
+    "type": "string"
+  },
+  {
+    "tool": "codeCompletion",
+    "field": "line",
+    "method": "codeCompletion",
+    "parameter": "line",
+    "type": "number"
+  },
+  {
+    "tool": "codeCompletion",
+    "field": "column",
+    "method": "codeCompletion",
+    "parameter": "column",
+    "type": "number"
+  },
+  {
+    "tool": "findDefinition",
+    "field": "url",
+    "method": "findDefinition",
+    "parameter": "url",
+    "type": "string"
+  },
+  {
+    "tool": "findDefinition",
+    "field": "source",
+    "method": "findDefinition",
+    "parameter": "source",
+    "type": "string"
+  },
+  {
+    "tool": "findDefinition",
+    "field": "line",
+    "method": "findDefinition",
+    "parameter": "line",
+    "type": "number"
+  },
+  {
+    "tool": "findDefinition",
+    "field": "startCol",
+    "method": "findDefinition",
+    "parameter": "startCol",
+    "type": "number"
+  },
+  {
+    "tool": "findDefinition",
+    "field": "endCol",
+    "method": "findDefinition",
+    "parameter": "endCol",
+    "type": "number"
+  },
+  {
+    "tool": "findDefinition",
+    "field": "implementation",
+    "method": "findDefinition",
+    "parameter": "implementation",
+    "type": "boolean | undefined"
+  },
+  {
+    "tool": "findDefinition",
+    "field": "mainProgram",
+    "method": "findDefinition",
+    "parameter": "mainProgram",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "usageReferences",
+    "field": "url",
+    "method": "usageReferences",
+    "parameter": "url",
+    "type": "string"
+  },
+  {
+    "tool": "usageReferences",
+    "field": "line",
+    "method": "usageReferences",
+    "parameter": "line",
+    "type": "number | undefined"
+  },
+  {
+    "tool": "usageReferences",
+    "field": "column",
+    "method": "usageReferences",
+    "parameter": "column",
+    "type": "number | undefined"
+  },
+  {
+    "tool": "codeCompletionFull",
+    "field": "sourceUrl",
+    "method": "codeCompletionFull",
+    "parameter": "sourceUrl",
+    "type": "string"
+  },
+  {
+    "tool": "codeCompletionFull",
+    "field": "source",
+    "method": "codeCompletionFull",
+    "parameter": "source",
+    "type": "string"
+  },
+  {
+    "tool": "codeCompletionFull",
+    "field": "line",
+    "method": "codeCompletionFull",
+    "parameter": "line",
+    "type": "number"
+  },
+  {
+    "tool": "codeCompletionFull",
+    "field": "column",
+    "method": "codeCompletionFull",
+    "parameter": "column",
+    "type": "number"
+  },
+  {
+    "tool": "codeCompletionFull",
+    "field": "patternKey",
+    "method": "codeCompletionFull",
+    "parameter": "patternKey",
+    "type": "string"
+  },
+  {
+    "tool": "runClass",
+    "field": "className",
+    "method": "runClass",
+    "parameter": "className",
+    "type": "string"
+  },
+  {
+    "tool": "codeCompletionElement",
+    "field": "sourceUrl",
+    "method": "codeCompletionElement",
+    "parameter": "sourceUrl",
+    "type": "string"
+  },
+  {
+    "tool": "codeCompletionElement",
+    "field": "source",
+    "method": "codeCompletionElement",
+    "parameter": "source",
+    "type": "string"
+  },
+  {
+    "tool": "codeCompletionElement",
+    "field": "line",
+    "method": "codeCompletionElement",
+    "parameter": "line",
+    "type": "number"
+  },
+  {
+    "tool": "codeCompletionElement",
+    "field": "column",
+    "method": "codeCompletionElement",
+    "parameter": "column",
+    "type": "number"
+  },
+  {
+    "tool": "usageReferenceSnippets",
+    "field": "references",
+    "method": "usageReferenceSnippets",
+    "parameter": "references",
+    "type": "UsageReference[]"
+  },
+  {
+    "tool": "fixProposals",
+    "field": "url",
+    "method": "fixProposals",
+    "parameter": "url",
+    "type": "string"
+  },
+  {
+    "tool": "fixProposals",
+    "field": "source",
+    "method": "fixProposals",
+    "parameter": "source",
+    "type": "string"
+  },
+  {
+    "tool": "fixProposals",
+    "field": "line",
+    "method": "fixProposals",
+    "parameter": "line",
+    "type": "number"
+  },
+  {
+    "tool": "fixProposals",
+    "field": "column",
+    "method": "fixProposals",
+    "parameter": "column",
+    "type": "number"
+  },
+  {
+    "tool": "fixEdits",
+    "field": "proposal",
+    "method": "fixEdits",
+    "parameter": "proposal",
+    "type": "FixProposal"
+  },
+  {
+    "tool": "fixEdits",
+    "field": "source",
+    "method": "fixEdits",
+    "parameter": "source",
+    "type": "string"
+  },
+  {
+    "tool": "fragmentMappings",
+    "field": "url",
+    "method": "fragmentMappings",
+    "parameter": "url",
+    "type": "string"
+  },
+  {
+    "tool": "fragmentMappings",
+    "field": "type",
+    "method": "fragmentMappings",
+    "parameter": "type",
+    "type": "string"
+  },
+  {
+    "tool": "fragmentMappings",
+    "field": "name",
+    "method": "fragmentMappings",
+    "parameter": "name",
+    "type": "string"
+  },
+  {
+    "tool": "abapDocumentation",
+    "field": "objectUri",
+    "method": "abapDocumentation",
+    "parameter": "objectUri",
+    "type": "string"
+  },
+  {
+    "tool": "abapDocumentation",
+    "field": "body",
+    "method": "abapDocumentation",
+    "parameter": "body",
+    "type": "string"
+  },
+  {
+    "tool": "abapDocumentation",
+    "field": "line",
+    "method": "abapDocumentation",
+    "parameter": "line",
+    "type": "number"
+  },
+  {
+    "tool": "abapDocumentation",
+    "field": "column",
+    "method": "abapDocumentation",
+    "parameter": "column",
+    "type": "number"
+  },
+  {
+    "tool": "abapDocumentation",
+    "field": "language",
+    "method": "abapDocumentation",
+    "parameter": "language",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "ddicElement",
+    "field": "path",
+    "method": "ddicElement",
+    "parameter": "path",
+    "type": "string | string[]"
+  },
+  {
+    "tool": "ddicElement",
+    "field": "getTargetForAssociation",
+    "method": "ddicElement",
+    "parameter": "getTargetForAssociation",
+    "type": "boolean | undefined"
+  },
+  {
+    "tool": "ddicElement",
+    "field": "getExtensionViews",
+    "method": "ddicElement",
+    "parameter": "getExtensionViews",
+    "type": "boolean | undefined"
+  },
+  {
+    "tool": "ddicElement",
+    "field": "getSecondaryObjects",
+    "method": "ddicElement",
+    "parameter": "getSecondaryObjects",
+    "type": "boolean | undefined"
+  },
+  {
+    "tool": "ddicRepositoryAccess",
+    "field": "path",
+    "method": "ddicRepositoryAccess",
+    "parameter": "path",
+    "type": "string | string[]"
+  },
+  {
+    "tool": "packageSearchHelp",
+    "field": "type",
+    "method": "packageSearchHelp",
+    "parameter": "type",
+    "type": "PackageValueHelpType"
+  },
+  {
+    "tool": "packageSearchHelp",
+    "field": "name",
+    "method": "packageSearchHelp",
+    "parameter": "name",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "debuggerListeners",
+    "field": "debuggingMode",
+    "method": "debuggerListeners",
+    "parameter": "debuggingMode",
+    "type": "\"user\""
+  },
+  {
+    "tool": "debuggerListeners",
+    "field": "terminalId",
+    "method": "debuggerListeners",
+    "parameter": "terminalId",
+    "type": "string"
+  },
+  {
+    "tool": "debuggerListeners",
+    "field": "ideId",
+    "method": "debuggerListeners",
+    "parameter": "ideId",
+    "type": "string"
+  },
+  {
+    "tool": "debuggerListeners",
+    "field": "user",
+    "method": "debuggerListeners",
+    "parameter": "user",
+    "type": "string"
+  },
+  {
+    "tool": "debuggerListeners",
+    "field": "checkConflict",
+    "method": "debuggerListeners",
+    "parameter": "checkConflict",
+    "type": "boolean | undefined"
+  },
+  {
+    "tool": "debuggerListen",
+    "field": "debuggingMode",
+    "method": "debuggerListen",
+    "parameter": "debuggingMode",
+    "type": "\"user\""
+  },
+  {
+    "tool": "debuggerListen",
+    "field": "terminalId",
+    "method": "debuggerListen",
+    "parameter": "terminalId",
+    "type": "string"
+  },
+  {
+    "tool": "debuggerListen",
+    "field": "ideId",
+    "method": "debuggerListen",
+    "parameter": "ideId",
+    "type": "string"
+  },
+  {
+    "tool": "debuggerListen",
+    "field": "user",
+    "method": "debuggerListen",
+    "parameter": "user",
+    "type": "string"
+  },
+  {
+    "tool": "debuggerListen",
+    "field": "checkConflict",
+    "method": "debuggerListen",
+    "parameter": "checkConflict",
+    "type": "boolean | undefined"
+  },
+  {
+    "tool": "debuggerListen",
+    "field": "isNotifiedOnConflict",
+    "method": "debuggerListen",
+    "parameter": "isNotifiedOnConflict",
+    "type": "boolean | undefined"
+  },
+  {
+    "tool": "debuggerDeleteListener",
+    "field": "debuggingMode",
+    "method": "debuggerDeleteListener",
+    "parameter": "debuggingMode",
+    "type": "\"user\""
+  },
+  {
+    "tool": "debuggerDeleteListener",
+    "field": "terminalId",
+    "method": "debuggerDeleteListener",
+    "parameter": "terminalId",
+    "type": "string"
+  },
+  {
+    "tool": "debuggerDeleteListener",
+    "field": "ideId",
+    "method": "debuggerDeleteListener",
+    "parameter": "ideId",
+    "type": "string"
+  },
+  {
+    "tool": "debuggerDeleteListener",
+    "field": "user",
+    "method": "debuggerDeleteListener",
+    "parameter": "user",
+    "type": "string"
+  },
+  {
+    "tool": "debuggerSetBreakpoints",
+    "field": "debuggingMode",
+    "method": "debuggerSetBreakpoints",
+    "parameter": "debuggingMode",
+    "type": "\"user\""
+  },
+  {
+    "tool": "debuggerSetBreakpoints",
+    "field": "terminalId",
+    "method": "debuggerSetBreakpoints",
+    "parameter": "terminalId",
+    "type": "string"
+  },
+  {
+    "tool": "debuggerSetBreakpoints",
+    "field": "ideId",
+    "method": "debuggerSetBreakpoints",
+    "parameter": "ideId",
+    "type": "string"
+  },
+  {
+    "tool": "debuggerSetBreakpoints",
+    "field": "clientId",
+    "method": "debuggerSetBreakpoints",
+    "parameter": "clientId",
+    "type": "string"
+  },
+  {
+    "tool": "debuggerSetBreakpoints",
+    "field": "breakpoints",
+    "method": "debuggerSetBreakpoints",
+    "parameter": "breakpoints",
+    "type": "(string | DebugBreakpoint)[]"
+  },
+  {
+    "tool": "debuggerSetBreakpoints",
+    "field": "user",
+    "method": "debuggerSetBreakpoints",
+    "parameter": "user",
+    "type": "string"
+  },
+  {
+    "tool": "debuggerSetBreakpoints",
+    "field": "scope",
+    "method": "debuggerSetBreakpoints",
+    "parameter": "scope",
+    "type": "DebuggerScope | undefined"
+  },
+  {
+    "tool": "debuggerSetBreakpoints",
+    "field": "systemDebugging",
+    "method": "debuggerSetBreakpoints",
+    "parameter": "systemDebugging",
+    "type": "boolean | undefined"
+  },
+  {
+    "tool": "debuggerSetBreakpoints",
+    "field": "deactivated",
+    "method": "debuggerSetBreakpoints",
+    "parameter": "deactivated",
+    "type": "boolean | undefined"
+  },
+  {
+    "tool": "debuggerSetBreakpoints",
+    "field": "syncScupeUrl",
+    "method": "debuggerSetBreakpoints",
+    "parameter": "syncScupeUrl",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "debuggerDeleteBreakpoints",
+    "field": "breakpoint",
+    "method": "debuggerDeleteBreakpoints",
+    "parameter": "breakpoint",
+    "type": "DebugBreakpoint"
+  },
+  {
+    "tool": "debuggerDeleteBreakpoints",
+    "field": "debuggingMode",
+    "method": "debuggerDeleteBreakpoints",
+    "parameter": "debuggingMode",
+    "type": "\"user\""
+  },
+  {
+    "tool": "debuggerDeleteBreakpoints",
+    "field": "terminalId",
+    "method": "debuggerDeleteBreakpoints",
+    "parameter": "terminalId",
+    "type": "string"
+  },
+  {
+    "tool": "debuggerDeleteBreakpoints",
+    "field": "ideId",
+    "method": "debuggerDeleteBreakpoints",
+    "parameter": "ideId",
+    "type": "string"
+  },
+  {
+    "tool": "debuggerDeleteBreakpoints",
+    "field": "requestUser",
+    "method": "debuggerDeleteBreakpoints",
+    "parameter": "requestUser",
+    "type": "string"
+  },
+  {
+    "tool": "debuggerDeleteBreakpoints",
+    "field": "scope",
+    "method": "debuggerDeleteBreakpoints",
+    "parameter": "scope",
+    "type": "DebuggerScope | undefined"
+  },
+  {
+    "tool": "debuggerAttach",
+    "field": "debuggingMode",
+    "method": "debuggerAttach",
+    "parameter": "debuggingMode",
+    "type": "\"user\""
+  },
+  {
+    "tool": "debuggerAttach",
+    "field": "debuggeeId",
+    "method": "debuggerAttach",
+    "parameter": "debuggeeId",
+    "type": "string"
+  },
+  {
+    "tool": "debuggerAttach",
+    "field": "user",
+    "method": "debuggerAttach",
+    "parameter": "user",
+    "type": "string"
+  },
+  {
+    "tool": "debuggerAttach",
+    "field": "dynproDebugging",
+    "method": "debuggerAttach",
+    "parameter": "dynproDebugging",
+    "type": "boolean | undefined"
+  },
+  {
+    "tool": "debuggerSaveSettings",
+    "field": "settings",
+    "method": "debuggerSaveSettings",
+    "parameter": "settings",
+    "type": "Partial<DebugSettings>"
+  },
+  {
+    "tool": "debuggerStackTrace",
+    "field": "semanticURIs",
+    "method": "debuggerStackTrace",
+    "parameter": "semanticURIs",
+    "type": "boolean | undefined"
+  },
+  {
+    "tool": "debuggerVariables",
+    "field": "parents",
+    "method": "debuggerVariables",
+    "parameter": "parents",
+    "type": "string[]"
+  },
+  {
+    "tool": "debuggerChildVariables",
+    "field": "parent",
+    "method": "debuggerChildVariables",
+    "parameter": "parent",
+    "type": "string[] | undefined"
+  },
+  {
+    "tool": "debuggerStep",
+    "field": "steptype",
+    "method": "debuggerStep",
+    "parameter": "steptype",
+    "type": "\"stepRunToLine\" | \"stepJumpToLine\""
+  },
+  {
+    "tool": "debuggerStep",
+    "field": "url",
+    "method": "debuggerStep",
+    "parameter": "url",
+    "type": "string"
+  },
+  {
+    "tool": "debuggerGoToStack",
+    "field": "urlOrPosition",
+    "method": "debuggerGoToStack",
+    "parameter": "urlOrPosition",
+    "type": "string | number"
+  },
+  {
+    "tool": "debuggerSetVariableValue",
+    "field": "variableName",
+    "method": "debuggerSetVariableValue",
+    "parameter": "variableName",
+    "type": "string"
+  },
+  {
+    "tool": "debuggerSetVariableValue",
+    "field": "value",
+    "method": "debuggerSetVariableValue",
+    "parameter": "value",
+    "type": "string"
+  },
+  {
+    "tool": "featureDetails",
+    "field": "title",
+    "method": "featureDetails",
+    "parameter": "title",
+    "type": "string"
+  },
+  {
+    "tool": "collectionFeatureDetails",
+    "field": "url",
+    "method": "collectionFeatureDetails",
+    "parameter": "url",
+    "type": "string"
+  },
+  {
+    "tool": "findCollectionByUrl",
+    "field": "url",
+    "method": "findCollectionByUrl",
+    "parameter": "url",
+    "type": "string"
+  },
+  {
+    "tool": "dumps",
+    "field": "query",
+    "method": "dumps",
+    "parameter": "query",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "gitExternalRepoInfo",
+    "field": "repourl",
+    "method": "gitExternalRepoInfo",
+    "parameter": "repourl",
+    "type": "string"
+  },
+  {
+    "tool": "gitExternalRepoInfo",
+    "field": "user",
+    "method": "gitExternalRepoInfo",
+    "parameter": "user",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "gitExternalRepoInfo",
+    "field": "password",
+    "method": "gitExternalRepoInfo",
+    "parameter": "password",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "gitCreateRepo",
+    "field": "packageName",
+    "method": "gitCreateRepo",
+    "parameter": "packageName",
+    "type": "string"
+  },
+  {
+    "tool": "gitCreateRepo",
+    "field": "repourl",
+    "method": "gitCreateRepo",
+    "parameter": "repourl",
+    "type": "string"
+  },
+  {
+    "tool": "gitCreateRepo",
+    "field": "branch",
+    "method": "gitCreateRepo",
+    "parameter": "branch",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "gitCreateRepo",
+    "field": "transport",
+    "method": "gitCreateRepo",
+    "parameter": "transport",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "gitCreateRepo",
+    "field": "user",
+    "method": "gitCreateRepo",
+    "parameter": "user",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "gitCreateRepo",
+    "field": "password",
+    "method": "gitCreateRepo",
+    "parameter": "password",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "gitPullRepo",
+    "field": "repoId",
+    "method": "gitPullRepo",
+    "parameter": "repoId",
+    "type": "string"
+  },
+  {
+    "tool": "gitPullRepo",
+    "field": "branch",
+    "method": "gitPullRepo",
+    "parameter": "branch",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "gitPullRepo",
+    "field": "transport",
+    "method": "gitPullRepo",
+    "parameter": "transport",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "gitPullRepo",
+    "field": "user",
+    "method": "gitPullRepo",
+    "parameter": "user",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "gitPullRepo",
+    "field": "password",
+    "method": "gitPullRepo",
+    "parameter": "password",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "gitUnlinkRepo",
+    "field": "repoId",
+    "method": "gitUnlinkRepo",
+    "parameter": "repoId",
+    "type": "string"
+  },
+  {
+    "tool": "stageRepo",
+    "field": "repo",
+    "method": "stageRepo",
+    "parameter": "repo",
+    "type": "GitRepo"
+  },
+  {
+    "tool": "stageRepo",
+    "field": "user",
+    "method": "stageRepo",
+    "parameter": "user",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "stageRepo",
+    "field": "password",
+    "method": "stageRepo",
+    "parameter": "password",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "pushRepo",
+    "field": "repo",
+    "method": "pushRepo",
+    "parameter": "repo",
+    "type": "GitRepo"
+  },
+  {
+    "tool": "pushRepo",
+    "field": "staging",
+    "method": "pushRepo",
+    "parameter": "staging",
+    "type": "GitStaging"
+  },
+  {
+    "tool": "pushRepo",
+    "field": "user",
+    "method": "pushRepo",
+    "parameter": "user",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "pushRepo",
+    "field": "password",
+    "method": "pushRepo",
+    "parameter": "password",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "checkRepo",
+    "field": "repo",
+    "method": "checkRepo",
+    "parameter": "repo",
+    "type": "GitRepo"
+  },
+  {
+    "tool": "checkRepo",
+    "field": "user",
+    "method": "checkRepo",
+    "parameter": "user",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "checkRepo",
+    "field": "password",
+    "method": "checkRepo",
+    "parameter": "password",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "remoteRepoInfo",
+    "field": "repo",
+    "method": "remoteRepoInfo",
+    "parameter": "repo",
+    "type": "GitRepo"
+  },
+  {
+    "tool": "remoteRepoInfo",
+    "field": "user",
+    "method": "remoteRepoInfo",
+    "parameter": "user",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "remoteRepoInfo",
+    "field": "password",
+    "method": "remoteRepoInfo",
+    "parameter": "password",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "switchRepoBranch",
+    "field": "repo",
+    "method": "switchRepoBranch",
+    "parameter": "repo",
+    "type": "GitRepo"
+  },
+  {
+    "tool": "switchRepoBranch",
+    "field": "branch",
+    "method": "switchRepoBranch",
+    "parameter": "branch",
+    "type": "string"
+  },
+  {
+    "tool": "switchRepoBranch",
+    "field": "create",
+    "method": "switchRepoBranch",
+    "parameter": "create",
+    "type": "boolean | undefined"
+  },
+  {
+    "tool": "switchRepoBranch",
+    "field": "user",
+    "method": "switchRepoBranch",
+    "parameter": "user",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "switchRepoBranch",
+    "field": "password",
+    "method": "switchRepoBranch",
+    "parameter": "password",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "nodeContents",
+    "field": "parent_type",
+    "method": "nodeContents",
+    "parameter": "parent_type",
+    "type": "NodeParents"
+  },
+  {
+    "tool": "nodeContents",
+    "field": "parent_name",
+    "method": "nodeContents",
+    "parameter": "parent_name",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "nodeContents",
+    "field": "user_name",
+    "method": "nodeContents",
+    "parameter": "user_name",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "nodeContents",
+    "field": "parent_tech_name",
+    "method": "nodeContents",
+    "parameter": "parent_tech_name",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "nodeContents",
+    "field": "rebuild_tree",
+    "method": "nodeContents",
+    "parameter": "rebuild_tree",
+    "type": "boolean | undefined"
+  },
+  {
+    "tool": "nodeContents",
+    "field": "parentnodes",
+    "method": "nodeContents",
+    "parameter": "parentnodes",
+    "type": "number[] | undefined"
+  },
+  {
+    "tool": "mainPrograms",
+    "field": "includeUrl",
+    "method": "mainPrograms",
+    "parameter": "includeUrl",
+    "type": "string"
+  },
+  {
+    "tool": "deleteObject",
+    "field": "objectUrl",
+    "method": "deleteObject",
+    "parameter": "objectUrl",
+    "type": "string"
+  },
+  {
+    "tool": "deleteObject",
+    "field": "lockHandle",
+    "method": "deleteObject",
+    "parameter": "lockHandle",
+    "type": "string"
+  },
+  {
+    "tool": "deleteObject",
+    "field": "transport",
+    "method": "deleteObject",
+    "parameter": "transport",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "objectStructure",
+    "field": "objectUrl",
+    "method": "objectStructure",
+    "parameter": "objectUrl",
+    "type": "string"
+  },
+  {
+    "tool": "objectStructure",
+    "field": "version",
+    "method": "objectStructure",
+    "parameter": "version",
+    "type": "ObjectVersion | undefined"
+  },
+  {
+    "tool": "findObjectPath",
+    "field": "objectUrl",
+    "method": "findObjectPath",
+    "parameter": "objectUrl",
+    "type": "string"
+  },
+  {
+    "tool": "searchObject",
+    "field": "query",
+    "method": "searchObject",
+    "parameter": "query",
+    "type": "string"
+  },
+  {
+    "tool": "searchObject",
+    "field": "objType",
+    "method": "searchObject",
+    "parameter": "objType",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "lock",
+    "field": "objectUrl",
+    "method": "lock",
+    "parameter": "objectUrl",
+    "type": "string"
+  },
+  {
+    "tool": "lock",
+    "field": "accessMode",
+    "method": "lock",
+    "parameter": "accessMode",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "unLock",
+    "field": "objectUrl",
+    "method": "unLock",
+    "parameter": "objectUrl",
+    "type": "string"
+  },
+  {
+    "tool": "unLock",
+    "field": "lockHandle",
+    "method": "unLock",
+    "parameter": "lockHandle",
+    "type": "string"
+  },
+  {
+    "tool": "activateObjects",
+    "field": "preauditRequested",
+    "method": "activate",
+    "parameter": "preauditRequested",
+    "type": "boolean | undefined"
+  },
+  {
+    "tool": "activateByName",
+    "field": "objectName",
+    "method": "activate",
+    "parameter": "objectName",
+    "type": "string"
+  },
+  {
+    "tool": "activateByName",
+    "field": "objectUrl",
+    "method": "activate",
+    "parameter": "objectUrl",
+    "type": "string"
+  },
+  {
+    "tool": "activateByName",
+    "field": "mainInclude",
+    "method": "activate",
+    "parameter": "mainInclude",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "activateByName",
+    "field": "preauditRequested",
+    "method": "activate",
+    "parameter": "preauditRequested",
+    "type": "boolean | undefined"
+  },
+  {
+    "tool": "objectRegistrationInfo",
+    "field": "objectUrl",
+    "method": "objectRegistrationInfo",
+    "parameter": "objectUrl",
+    "type": "string"
+  },
+  {
+    "tool": "validateNewObject",
+    "field": "options",
+    "method": "validateNewObject",
+    "parameter": "options",
+    "type": "ValidateOptions"
+  },
+  {
+    "tool": "createObject",
+    "field": "objtype",
+    "method": "createObject",
+    "parameter": "objtype",
+    "type": "CreatableTypeIds"
+  },
+  {
+    "tool": "createObject",
+    "field": "name",
+    "method": "createObject",
+    "parameter": "name",
+    "type": "string"
+  },
+  {
+    "tool": "createObject",
+    "field": "parentName",
+    "method": "createObject",
+    "parameter": "parentName",
+    "type": "string"
+  },
+  {
+    "tool": "createObject",
+    "field": "description",
+    "method": "createObject",
+    "parameter": "description",
+    "type": "string"
+  },
+  {
+    "tool": "createObject",
+    "field": "parentPath",
+    "method": "createObject",
+    "parameter": "parentPath",
+    "type": "string"
+  },
+  {
+    "tool": "createObject",
+    "field": "responsible",
+    "method": "createObject",
+    "parameter": "responsible",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "createObject",
+    "field": "transport",
+    "method": "createObject",
+    "parameter": "transport",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "getObjectSource",
+    "field": "objectSourceUrl",
+    "method": "getObjectSource",
+    "parameter": "objectSourceUrl",
+    "type": "string"
+  },
+  {
+    "tool": "getObjectSource",
+    "field": "options",
+    "method": "getObjectSource",
+    "parameter": "options",
+    "type": "ObjectSourceOptions | undefined"
+  },
+  {
+    "tool": "setObjectSource",
+    "field": "objectSourceUrl",
+    "method": "setObjectSource",
+    "parameter": "objectSourceUrl",
+    "type": "string"
+  },
+  {
+    "tool": "setObjectSource",
+    "field": "source",
+    "method": "setObjectSource",
+    "parameter": "source",
+    "type": "string"
+  },
+  {
+    "tool": "setObjectSource",
+    "field": "lockHandle",
+    "method": "setObjectSource",
+    "parameter": "lockHandle",
+    "type": "string"
+  },
+  {
+    "tool": "setObjectSource",
+    "field": "transport",
+    "method": "setObjectSource",
+    "parameter": "transport",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "setPrettyPrinterSetting",
+    "field": "indent",
+    "method": "setPrettyPrinterSetting",
+    "parameter": "indent",
+    "type": "boolean"
+  },
+  {
+    "tool": "setPrettyPrinterSetting",
+    "field": "style",
+    "method": "setPrettyPrinterSetting",
+    "parameter": "style",
+    "type": "PrettyPrinterStyle"
+  },
+  {
+    "tool": "prettyPrinter",
+    "field": "source",
+    "method": "prettyPrinter",
+    "parameter": "source",
+    "type": "string"
+  },
+  {
+    "tool": "tableContents",
+    "field": "ddicEntityName",
+    "method": "tableContents",
+    "parameter": "ddicEntityName",
+    "type": "string"
+  },
+  {
+    "tool": "tableContents",
+    "field": "decode",
+    "method": "tableContents",
+    "parameter": "decode",
+    "type": "boolean | undefined"
+  },
+  {
+    "tool": "tableContents",
+    "field": "sqlQuery",
+    "method": "tableContents",
+    "parameter": "sqlQuery",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "runQuery",
+    "field": "sqlQuery",
+    "method": "runQuery",
+    "parameter": "sqlQuery",
+    "type": "string"
+  },
+  {
+    "tool": "runQuery",
+    "field": "decode",
+    "method": "runQuery",
+    "parameter": "decode",
+    "type": "boolean | undefined"
+  },
+  {
+    "tool": "extractMethodEvaluate",
+    "field": "uri",
+    "method": "extractMethodEvaluate",
+    "parameter": "uri",
+    "type": "string"
+  },
+  {
+    "tool": "extractMethodEvaluate",
+    "field": "range",
+    "method": "extractMethodEvaluate",
+    "parameter": "range",
+    "type": "Range"
+  },
+  {
+    "tool": "extractMethodPreview",
+    "field": "proposal",
+    "method": "extractMethodPreview",
+    "parameter": "proposal",
+    "type": "ExtractMethodProposal"
+  },
+  {
+    "tool": "extractMethodExecute",
+    "field": "refactoring",
+    "method": "extractMethodExecute",
+    "parameter": "refactoring",
+    "type": "GenericRefactoring"
+  },
+  {
+    "tool": "renameEvaluate",
+    "field": "uri",
+    "method": "renameEvaluate",
+    "parameter": "uri",
+    "type": "string"
+  },
+  {
+    "tool": "renameEvaluate",
+    "field": "line",
+    "method": "renameEvaluate",
+    "parameter": "line",
+    "type": "number"
+  },
+  {
+    "tool": "renameEvaluate",
+    "field": "startColumn",
+    "method": "renameEvaluate",
+    "parameter": "startColumn",
+    "type": "number"
+  },
+  {
+    "tool": "renameEvaluate",
+    "field": "endColumn",
+    "method": "renameEvaluate",
+    "parameter": "endColumn",
+    "type": "number"
+  },
+  {
+    "tool": "renamePreview",
+    "field": "renameRefactoring",
+    "method": "renamePreview",
+    "parameter": "renameRefactoring",
+    "type": "RenameRefactoringProposal"
+  },
+  {
+    "tool": "renamePreview",
+    "field": "transport",
+    "method": "renamePreview",
+    "parameter": "transport",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "renameExecute",
+    "field": "refactoring",
+    "method": "renameExecute",
+    "parameter": "refactoring",
+    "type": "RenameRefactoring"
+  },
+  {
+    "tool": "revisions",
+    "field": "objectUrl",
+    "method": "revisions",
+    "parameter": "objectUrl",
+    "type": "string | AbapObjectStructure"
+  },
+  {
+    "tool": "revisions",
+    "field": "clsInclude",
+    "method": "revisions",
+    "parameter": "clsInclude",
+    "type": "classIncludes | undefined"
+  },
+  {
+    "tool": "publishServiceBinding",
+    "field": "name",
+    "method": "publishServiceBinding",
+    "parameter": "name",
+    "type": "string"
+  },
+  {
+    "tool": "publishServiceBinding",
+    "field": "version",
+    "method": "publishServiceBinding",
+    "parameter": "version",
+    "type": "string"
+  },
+  {
+    "tool": "unPublishServiceBinding",
+    "field": "name",
+    "method": "unPublishServiceBinding",
+    "parameter": "name",
+    "type": "string"
+  },
+  {
+    "tool": "unPublishServiceBinding",
+    "field": "version",
+    "method": "unPublishServiceBinding",
+    "parameter": "version",
+    "type": "string"
+  },
+  {
+    "tool": "bindingDetails",
+    "field": "binding",
+    "method": "bindingDetails",
+    "parameter": "binding",
+    "type": "ServiceBinding"
+  },
+  {
+    "tool": "bindingDetails",
+    "field": "index",
+    "method": "bindingDetails",
+    "parameter": "index",
+    "type": "number | undefined"
+  },
+  {
+    "tool": "tracesList",
+    "field": "user",
+    "method": "tracesList",
+    "parameter": "user",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "tracesListRequests",
+    "field": "user",
+    "method": "tracesListRequests",
+    "parameter": "user",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "tracesHitList",
+    "field": "id",
+    "method": "tracesHitList",
+    "parameter": "id",
+    "type": "string"
+  },
+  {
+    "tool": "tracesHitList",
+    "field": "withSystemEvents",
+    "method": "tracesHitList",
+    "parameter": "withSystemEvents",
+    "type": "boolean | undefined"
+  },
+  {
+    "tool": "tracesDbAccess",
+    "field": "id",
+    "method": "tracesDbAccess",
+    "parameter": "id",
+    "type": "string"
+  },
+  {
+    "tool": "tracesDbAccess",
+    "field": "withSystemEvents",
+    "method": "tracesDbAccess",
+    "parameter": "withSystemEvents",
+    "type": "boolean | undefined"
+  },
+  {
+    "tool": "tracesStatements",
+    "field": "id",
+    "method": "tracesStatements",
+    "parameter": "id",
+    "type": "string"
+  },
+  {
+    "tool": "tracesStatements",
+    "field": "options",
+    "method": "tracesStatements",
+    "parameter": "options",
+    "type": "Partial<{ id: number; withDetails: boolean; autoDrillDownThreshold: number; withSystemEvents: boolean; }> | undefined"
+  },
+  {
+    "tool": "tracesSetParameters",
+    "field": "parameters",
+    "method": "tracesSetParameters",
+    "parameter": "parameters",
+    "type": "TraceParameters"
+  },
+  {
+    "tool": "tracesCreateConfiguration",
+    "field": "config",
+    "method": "tracesCreateConfiguration",
+    "parameter": "config",
+    "type": "TracesCreationConfig"
+  },
+  {
+    "tool": "tracesDeleteConfiguration",
+    "field": "id",
+    "method": "tracesDeleteConfiguration",
+    "parameter": "id",
+    "type": "string"
+  },
+  {
+    "tool": "tracesDelete",
+    "field": "id",
+    "method": "tracesDelete",
+    "parameter": "id",
+    "type": "string"
+  },
+  {
+    "tool": "transportInfo",
+    "field": "objSourceUrl",
+    "method": "transportInfo",
+    "parameter": "objSourceUrl",
+    "type": "string"
+  },
+  {
+    "tool": "transportInfo",
+    "field": "devClass",
+    "method": "transportInfo",
+    "parameter": "devClass",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "transportInfo",
+    "field": "operation",
+    "method": "transportInfo",
+    "parameter": "operation",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "createTransport",
+    "field": "objSourceUrl",
+    "method": "createTransport",
+    "parameter": "objSourceUrl",
+    "type": "string"
+  },
+  {
+    "tool": "createTransport",
+    "field": "REQUEST_TEXT",
+    "method": "createTransport",
+    "parameter": "REQUEST_TEXT",
+    "type": "string"
+  },
+  {
+    "tool": "createTransport",
+    "field": "DEVCLASS",
+    "method": "createTransport",
+    "parameter": "DEVCLASS",
+    "type": "string"
+  },
+  {
+    "tool": "createTransport",
+    "field": "transportLayer",
+    "method": "createTransport",
+    "parameter": "transportLayer",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "getTransportConfiguration",
+    "field": "url",
+    "method": "getTransportConfiguration",
+    "parameter": "url",
+    "type": "string"
+  },
+  {
+    "tool": "setTransportsConfig",
+    "field": "uri",
+    "method": "setTransportsConfig",
+    "parameter": "uri",
+    "type": "string"
+  },
+  {
+    "tool": "setTransportsConfig",
+    "field": "etag",
+    "method": "setTransportsConfig",
+    "parameter": "etag",
+    "type": "string"
+  },
+  {
+    "tool": "setTransportsConfig",
+    "field": "config",
+    "method": "setTransportsConfig",
+    "parameter": "config",
+    "type": "TransportConfiguration"
+  },
+  {
+    "tool": "userTransports",
+    "field": "user",
+    "method": "userTransports",
+    "parameter": "user",
+    "type": "string"
+  },
+  {
+    "tool": "userTransports",
+    "field": "targets",
+    "method": "userTransports",
+    "parameter": "targets",
+    "type": "boolean | undefined"
+  },
+  {
+    "tool": "transportsByConfig",
+    "field": "configUri",
+    "method": "transportsByConfig",
+    "parameter": "configUri",
+    "type": "string"
+  },
+  {
+    "tool": "transportsByConfig",
+    "field": "targets",
+    "method": "transportsByConfig",
+    "parameter": "targets",
+    "type": "boolean | undefined"
+  },
+  {
+    "tool": "transportDelete",
+    "field": "transportNumber",
+    "method": "transportDelete",
+    "parameter": "transportNumber",
+    "type": "string"
+  },
+  {
+    "tool": "transportRelease",
+    "field": "transportNumber",
+    "method": "transportRelease",
+    "parameter": "transportNumber",
+    "type": "string"
+  },
+  {
+    "tool": "transportRelease",
+    "field": "ignoreLocks",
+    "method": "transportRelease",
+    "parameter": "ignoreLocks",
+    "type": "boolean | undefined"
+  },
+  {
+    "tool": "transportRelease",
+    "field": "IgnoreATC",
+    "method": "transportRelease",
+    "parameter": "IgnoreATC",
+    "type": "boolean | undefined"
+  },
+  {
+    "tool": "transportSetOwner",
+    "field": "transportNumber",
+    "method": "transportSetOwner",
+    "parameter": "transportNumber",
+    "type": "string"
+  },
+  {
+    "tool": "transportSetOwner",
+    "field": "targetuser",
+    "method": "transportSetOwner",
+    "parameter": "targetuser",
+    "type": "string"
+  },
+  {
+    "tool": "transportAddUser",
+    "field": "transportNumber",
+    "method": "transportAddUser",
+    "parameter": "transportNumber",
+    "type": "string"
+  },
+  {
+    "tool": "transportAddUser",
+    "field": "user",
+    "method": "transportAddUser",
+    "parameter": "user",
+    "type": "string"
+  },
+  {
+    "tool": "transportReference",
+    "field": "pgmid",
+    "method": "transportReference",
+    "parameter": "pgmid",
+    "type": "string"
+  },
+  {
+    "tool": "transportReference",
+    "field": "obj_wbtype",
+    "method": "transportReference",
+    "parameter": "obj_wbtype",
+    "type": "string"
+  },
+  {
+    "tool": "transportReference",
+    "field": "obj_name",
+    "method": "transportReference",
+    "parameter": "obj_name",
+    "type": "string"
+  },
+  {
+    "tool": "transportReference",
+    "field": "tr_number",
+    "method": "transportReference",
+    "parameter": "tr_number",
+    "type": "string | undefined"
+  },
+  {
+    "tool": "unitTestRun",
+    "field": "url",
+    "method": "unitTestRun",
+    "parameter": "url",
+    "type": "string"
+  },
+  {
+    "tool": "unitTestRun",
+    "field": "flags",
+    "method": "unitTestRun",
+    "parameter": "flags",
+    "type": "UnitTestRunFlags | undefined"
+  },
+  {
+    "tool": "unitTestEvaluation",
+    "field": "clas",
+    "method": "unitTestEvaluation",
+    "parameter": "clas",
+    "type": "UnitTestClass"
+  },
+  {
+    "tool": "unitTestEvaluation",
+    "field": "flags",
+    "method": "unitTestEvaluation",
+    "parameter": "flags",
+    "type": "UnitTestRunFlags | undefined"
+  },
+  {
+    "tool": "unitTestOccurrenceMarkers",
+    "field": "url",
+    "method": "unitTestOccurrenceMarkers",
+    "parameter": "url",
+    "type": "string"
+  },
+  {
+    "tool": "unitTestOccurrenceMarkers",
+    "field": "source",
+    "method": "unitTestOccurrenceMarkers",
+    "parameter": "source",
+    "type": "string"
+  },
+  {
+    "tool": "createTestInclude",
+    "field": "clas",
+    "method": "createTestInclude",
+    "parameter": "clas",
+    "type": "string"
+  },
+  {
+    "tool": "createTestInclude",
+    "field": "lockHandle",
+    "method": "createTestInclude",
+    "parameter": "lockHandle",
+    "type": "string"
+  },
+  {
+    "tool": "createTestInclude",
+    "field": "transport",
+    "method": "createTestInclude",
+    "parameter": "transport",
+    "type": "string | undefined"
+  }
+]

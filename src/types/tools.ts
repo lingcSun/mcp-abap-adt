@@ -3,11 +3,14 @@ export interface ToolDefinition {
   description: string;
   inputSchema: {
     type: string;
-    properties: Record<string, {
-      type: string;
-      description?: string;
-      optional?: boolean;
-    }>;
+    properties: Record<
+      string,
+      {
+        type: string;
+        description?: string;
+        optional?: boolean;
+      }
+    >;
     required?: string[];
   };
 }

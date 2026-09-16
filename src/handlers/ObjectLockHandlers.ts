@@ -1,55 +1,62 @@
-import { McpError, ErrorCode } from "@modelcontextprotocol/sdk/types.js";
-import { BaseHandler } from './BaseHandler.js';
-import type { ToolDefinition } from '../types/tools.js';
+import { stringify } from "../lib/results.js";
+import { McpError, ErrorCode } from "../lib/errors.js";
+import { BaseHandler } from "./BaseHandler.js";
+import type { ToolDefinition } from "../types/tools.js";
 import { ADTClient, session_types } from "abap-adt-api";
 
 export class ObjectLockHandlers extends BaseHandler {
   getTools(): ToolDefinition[] {
-    return [{
-      name: 'lock',
-      description: 'Lock an object',
-      inputSchema: {
-        type: 'object',
-        properties: {
-          objectUrl: { 
-            type: 'string',
-            description: 'URL of the object to lock'
+    return [
+      {
+        name: "lock",
+        description: "Lock an object",
+        inputSchema: {
+          type: "object",
+          properties: {
+            objectUrl: {
+              type: "string",
+              description: "URL of the object to lock",
+            },
+            accessMode: {
+              type: "string",
+              description: "Access mode for the lock",
+              optional: true,
+            },
           },
-          accessMode: { 
-            type: 'string',
-            description: 'Access mode for the lock',
-            optional: true 
-          }
+          required: ["objectUrl"],
         },
-        required: ['objectUrl']
-      }
-    }, {
-      name: 'unLock',
-      description: 'Unlock an object',
-      inputSchema: {
-        type: 'object',
-        properties: {
-          objectUrl: { 
-            type: 'string',
-            description: 'URL of the object to unlock'
+      },
+      {
+        name: "unLock",
+        description: "Unlock an object",
+        inputSchema: {
+          type: "object",
+          properties: {
+            objectUrl: {
+              type: "string",
+              description: "URL of the object to unlock",
+            },
+            lockHandle: {
+              type: "string",
+              description: "Lock handle obtained from previous lock operation",
+            },
           },
-          lockHandle: { 
-            type: 'string',
-            description: 'Lock handle obtained from previous lock operation'
-          }
+          required: ["objectUrl", "lockHandle"],
         },
-        required: ['objectUrl', 'lockHandle']
-      }
-    }];
+      },
+    ];
   }
   async handle(toolName: string, args: any): Promise<any> {
     switch (toolName) {
-      case 'lock':
+      case "lock":
         return this.handleLock(args);
-      case 'unLock':
+      case "unLock":
         return this.handleUnlock(args);
       default:
-        throw new McpError(ErrorCode.MethodNotFound, `Unknown object lock tool: ${toolName}`);
+        throw new McpError(
+          ErrorCode.MethodNotFound,
+          `Unknown object lock tool: ${toolName}`,
+        );
     }
   }
 
@@ -58,26 +65,26 @@ export class ObjectLockHandlers extends BaseHandler {
     try {
       // dropSession/logout reset the client to stateless; locks require a stateful session
       this.adtclient.stateful = session_types.stateful;
-      const lockResult = await this.adtclient.lock(args.objectUrl, args.accessMode);
+      const lockResult = await this.adtclient.lock(
+        args.objectUrl,
+        args.accessMode,
+      );
       this.trackRequest(startTime, true);
       return {
         content: [
           {
-            type: 'text',
-            text: JSON.stringify({
-              status: 'success',
+            type: "text",
+            text: stringify({
+              status: "success",
               lockHandle: lockResult.LOCK_HANDLE,
-              message: 'Object locked successfully'
-            })
-          }
-        ]
+              message: "Object locked successfully",
+            }),
+          },
+        ],
       };
     } catch (error: any) {
       this.trackRequest(startTime, false);
-      throw new McpError(
-        ErrorCode.InternalError,
-        `Failed to lock object: ${error.message || 'Unknown error'}`
-      );
+      throw error;
     }
   }
 
@@ -91,20 +98,17 @@ export class ObjectLockHandlers extends BaseHandler {
       return {
         content: [
           {
-            type: 'text',
-            text: JSON.stringify({
-              status: 'success',
-              message: 'Object unlocked successfully'
-            })
-          }
-        ]
+            type: "text",
+            text: stringify({
+              status: "success",
+              message: "Object unlocked successfully",
+            }),
+          },
+        ],
       };
     } catch (error: any) {
       this.trackRequest(startTime, false);
-      throw new McpError(
-        ErrorCode.InternalError,
-        `Failed to unlock object: ${error.message || 'Unknown error'}`
-      );
+      throw error;
     }
   }
 }
