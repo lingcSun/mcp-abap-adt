@@ -54,11 +54,17 @@ export class AuthHandlers extends BaseHandler {
     try {
       const loginResult = await this.adtclient.login();
       this.trackRequest(startTime, true);
+      // The fork's login() resolves the raw HTTP response (compatibility
+      // graph); keep the tool contract small and stable instead of leaking
+      // the whole response body into the client context.
       return {
         content: [
           {
             type: "text",
-            text: stringify(loginResult ?? { status: "logged in" }),
+            text: stringify({
+              status: "logged in",
+              httpStatus: loginResult?.status,
+            }),
           },
         ],
       };
