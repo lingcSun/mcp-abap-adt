@@ -69,7 +69,7 @@ Original workflow examples follow. Runtime, schema and installation behavior abo
 Use this Custom Instruction to explain the tool to your model:
 
 ````
-## mcp-abap-abap-adt-api Server
+## mcp-abap-adt Server
 
 This server provides tools for interacting with an SAP system via ADT (ABAP Development Tools) APIs. It allows you to retrieve information about ABAP objects, modify source code, and manage transports.
 

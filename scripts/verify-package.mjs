@@ -38,13 +38,13 @@ try {
     ],
     dir,
   );
-  const base = path.join(dir, "node_modules", "mcp-abap-abap-adt-api");
+  const base = path.join(dir, "node_modules", "@lingc-sun", "mcp-abap-adt");
   const pkg = JSON.parse(
     await readFile(path.join(base, "package.json"), "utf8"),
   );
   await verify([
     process.execPath,
-    path.join(base, pkg.bin["mcp-abap-abap-adt-api"]),
+    path.join(base, pkg.bin["mcp-abap-adt"]),
   ]);
   // Mirror registries (npmmirror etc.) don't implement the audit endpoint;
   // that's an environment limitation, not a security finding.
