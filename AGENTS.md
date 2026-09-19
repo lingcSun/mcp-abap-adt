@@ -29,7 +29,11 @@ npm run contracts    # 重新生成 src/lib/input-contracts.json（生成物，�
 - **新增工具只落 handler 两处**（getTools + handle），不写路由分支；工具定义自动进表与校验（[rationale](.agents/notes/implemented/architecture/2026-09-18-handler-registry-and-flat-tool-table.md)）。
 - **`src/lib/input-contracts.json` 是生成物**：改契约改工具定义后跑 `npm run contracts`，勿手改（[rationale](.agents/notes/implemented/process/2026-09-18-input-contracts-as-generated-artifact.md)）。
 
-本文件预算 ≤ 2000 字符（按字符计，中英文同口径）。超出先搬家（挪到笔记或 README）、再压缩；确需更多才改这个数字，并在提交说明里给理由。
+## Fork 与上游 commit 纪律
+
+本仓库 fork 自 mario-andreschak/mcp-abap-abap-adt-api。commit 先分类：不依赖 `@lingc-sun/abap-adt-api`、不含 fork 包身份与 agent 语料、公共依赖下可编译的进可上游 commit；其余 fork 专属单独 commit，加 `Fork-only: yes` 尾注。可上游在前、fork 专属在后；`pr-upstream` 指向可上游段顶端，发上游 PR 从它出发（[rationale](.agents/notes/implemented/process/2026-09-19-fork-upstream-commit-discipline.md)）。
+
+本文件预算 ≤ 2300 字符（按字符计，中英文同口径）。超出先搬家（挪到笔记或 README）、再压缩；确需更多才改这个数字，并在提交说明里给理由。
 
 ## Agent Notes
 
