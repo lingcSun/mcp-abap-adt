@@ -1,7 +1,7 @@
 import { request as httpRequest } from "node:http";
 import { request as httpsRequest } from "node:https";
 import { AsyncLocalStorage } from "node:async_hooks";
-import type { HttpClient } from "abap-adt-api";
+import type { HttpClient } from "@lingc-sun/abap-adt-api";
 import { McpError, ErrorCode } from "./errors.js";
 export const requestContext = new AsyncLocalStorage<{ signal: AbortSignal }>();
 export class BoundedHttpClient implements HttpClient {

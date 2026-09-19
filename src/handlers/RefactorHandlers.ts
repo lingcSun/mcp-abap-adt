@@ -7,7 +7,7 @@ import {
   Range,
   ExtractMethodProposal,
   GenericRefactoring,
-} from "abap-adt-api";
+} from "@lingc-sun/abap-adt-api";
 
 export class RefactorHandlers extends BaseHandler {
   getTools(): ToolDefinition[] {

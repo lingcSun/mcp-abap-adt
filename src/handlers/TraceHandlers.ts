@@ -7,7 +7,7 @@ import {
   TraceStatementOptions,
   TraceParameters,
   TracesCreationConfig,
-} from "abap-adt-api";
+} from "@lingc-sun/abap-adt-api";
 
 export class TraceHandlers extends BaseHandler {
   getTools(): ToolDefinition[] {

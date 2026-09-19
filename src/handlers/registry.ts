@@ -23,7 +23,7 @@ import { AtcHandlers } from "./AtcHandlers.js";
 import { TraceHandlers } from "./TraceHandlers.js";
 import { RefactorHandlers } from "./RefactorHandlers.js";
 import { RevisionHandlers } from "./RevisionHandlers.js";
-import type { ADTClient } from "abap-adt-api";
+import type { ADTClient } from "@lingc-sun/abap-adt-api";
 import { SourceCache } from "../lib/sourceCache.js";
 export function createHandlers(
   client: ADTClient | undefined,

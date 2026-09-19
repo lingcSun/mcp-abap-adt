@@ -1,5 +1,5 @@
 import { stringify } from "../lib/results.js";
-import { ADTClient } from "abap-adt-api";
+import { ADTClient } from "@lingc-sun/abap-adt-api";
 import { BaseHandler } from "./BaseHandler.js";
 import type { ToolDefinition } from "../types/tools.js";
 

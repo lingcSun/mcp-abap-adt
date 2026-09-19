@@ -1,8 +1,8 @@
 import { stringify } from "../lib/results.js";
-import { ADTClient } from "abap-adt-api";
+import { ADTClient } from "@lingc-sun/abap-adt-api";
 import { BaseHandler } from "./BaseHandler.js";
 import type { ToolDefinition } from "../types/tools.js";
-import { AtcProposal } from "abap-adt-api";
+import { AtcProposal } from "@lingc-sun/abap-adt-api";
 import { McpError, ErrorCode } from "../lib/errors.js";
 
 export class AtcHandlers extends BaseHandler {

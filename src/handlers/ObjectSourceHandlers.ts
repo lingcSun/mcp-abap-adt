@@ -2,7 +2,7 @@ import { stringify } from "../lib/results.js";
 import { McpError, ErrorCode } from "../lib/errors.js";
 import { BaseHandler } from "./BaseHandler.js";
 import type { ToolDefinition } from "../types/tools.js";
-import { session_types } from "abap-adt-api";
+import { session_types } from "@lingc-sun/abap-adt-api";
 import fs from "fs";
 import path from "path";
 

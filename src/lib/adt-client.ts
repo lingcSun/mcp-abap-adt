@@ -5,7 +5,7 @@ import {
   type ClassInclude,
   type Link,
   type ObjectVersion,
-} from "abap-adt-api";
+} from "@lingc-sun/abap-adt-api";
 import { XMLParser } from "fast-xml-parser";
 import { McpError, ErrorCode } from "./errors.js";
 const array = (v: any): any[] =>

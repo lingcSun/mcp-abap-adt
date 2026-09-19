@@ -6,7 +6,7 @@ import {
   ADTClient,
   RenameRefactoringProposal,
   RenameRefactoring,
-} from "abap-adt-api";
+} from "@lingc-sun/abap-adt-api";
 
 export class RenameHandlers extends BaseHandler {
   getTools(): ToolDefinition[] {

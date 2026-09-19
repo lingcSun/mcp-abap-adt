@@ -2,7 +2,7 @@ import { stringify } from "../lib/results.js";
 import { McpError, ErrorCode } from "../lib/errors.js";
 import { BaseHandler } from "./BaseHandler.js";
 import type { ToolDefinition } from "../types/tools.js";
-import { ADTClient, ServiceBinding } from "abap-adt-api";
+import { ADTClient, ServiceBinding } from "@lingc-sun/abap-adt-api";
 
 export class ServiceBindingHandlers extends BaseHandler {
   getTools(): ToolDefinition[] {

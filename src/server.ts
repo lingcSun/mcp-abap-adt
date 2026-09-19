@@ -1,6 +1,6 @@
 import { CompatibleAdtClient } from "./lib/adt-client.js";
 import { McpServer } from "@modelcontextprotocol/server";
-import { ADTClient, session_types } from "abap-adt-api";
+import { ADTClient, session_types } from "@lingc-sun/abap-adt-api";
 import { z } from "zod";
 import { createHandlers } from "./handlers/registry.js";
 import { SourceCache } from "./lib/sourceCache.js";

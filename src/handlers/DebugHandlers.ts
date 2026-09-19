@@ -7,7 +7,7 @@ import {
   DebuggerScope,
   DebugBreakpoint,
   DebugSettings,
-} from "abap-adt-api";
+} from "@lingc-sun/abap-adt-api";
 
 export class DebugHandlers extends BaseHandler {
   getTools(): ToolDefinition[] {

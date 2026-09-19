@@ -2,7 +2,7 @@ import { stringify } from "../lib/results.js";
 import { McpError, ErrorCode } from "../lib/errors.js";
 import { BaseHandler } from "./BaseHandler.js";
 import type { ToolDefinition } from "../types/tools.js";
-import { NodeParents, NodeStructure } from "abap-adt-api";
+import { NodeParents, NodeStructure } from "@lingc-sun/abap-adt-api";
 
 export class NodeHandlers extends BaseHandler {
   getTools(): ToolDefinition[] {
