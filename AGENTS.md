@@ -8,7 +8,7 @@
 npm run build        # tsc → dist/
 npm run check        # tsc --noEmit
 npm test             # tsx --test test/*.test.ts
-npm run start        # 运行编译产物（stdio 传输）
+npm run start
 npm run verify:stdio # stdio 冒烟验证
 npm run verify:package
 npm run verify:live  # 需要真实 SAP 连接
@@ -20,7 +20,7 @@ npm run contracts    # 重新生成 src/lib/input-contracts.json（生成物，�
 - `src/index.ts` stdio 启动与进程生命周期
 - `src/server.ts` 服务器装配：扁平工具表、调用协议（单活动请求、超时/中断、会话恢复门）、结果分页
 - `src/handlers/<Domain>Handlers.ts` 按域组织工具（26 个域）；`registry.ts` 汇总
-- `src/lib/` 基础设施：adt-client、errors、logger、results（分页）、sourceCache、input-contracts.json（生成物）
+- `src/lib/` 基础设施：errors、logger、分页 results、sourceCache、生成物 input-contracts.json
 
 ## Invariants
 
@@ -33,7 +33,11 @@ npm run contracts    # 重新生成 src/lib/input-contracts.json（生成物，�
 
 本仓库 fork 自 mario-andreschak/mcp-abap-abap-adt-api。commit 先分类：不依赖 `@lingc-sun/abap-adt-api`、不含 fork 包身份与 agent 语料、公共依赖下可编译的进可上游 commit；其余 fork 专属单独 commit，加 `Fork-only: yes` 尾注。可上游在前、fork 专属在后；`pr-upstream` 指向可上游段顶端，发上游 PR 从它出发（[rationale](.agents/notes/implemented/process/2026-09-19-fork-upstream-commit-discipline.md)）。
 
-本文件预算 ≤ 2300 字符（按字符计，中英文同口径）。超出先搬家（挪到笔记或 README）、再压缩；确需更多才改这个数字，并在提交说明里给理由。
+## npm 版本
+
+纯 semver，与上游版本脱钩：新工具/新参数/新能力 → minor；修复、文档 → patch；破坏工具契约（删工具、必填语义变化）→ major。release commit（`chore(release): x.y.z`）集中 package.json、server.json、CHANGELOG；test+verify 全绿后 publish 显式指向 npmjs（[checklist](.agents/notes/implemented/process/2026-09-19-npm-release-versioning.md)）。
+
+本文件预算 ≤ 2600 字符（按字符计，中英文同口径）。超出先搬家（挪到笔记或 README）、再压缩；确需更多才改这个数字，并在提交说明里给理由。
 
 ## Agent Notes
 
