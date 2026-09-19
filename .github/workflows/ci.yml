@@ -21,6 +21,7 @@ jobs:
       - run: npm test
       - run: npm run verify:stdio
       - run: npm run verify:package
+      - run: npm run verify:agents
       - run: npm audit
   docker:
     runs-on: ubuntu-latest

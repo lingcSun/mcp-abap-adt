@@ -20,7 +20,8 @@
     "verify:stdio": "node scripts/verify-stdio.mjs",
     "verify:package": "node scripts/verify-package.mjs",
     "verify:live": "node scripts/verify-live.mjs",
-    "contracts": "node scripts/generate-input-contracts.mjs"
+    "contracts": "node scripts/generate-input-contracts.mjs",
+    "verify:agents": "node scripts/verify-agents.mjs"
   },
   "keywords": [
     "abap",
