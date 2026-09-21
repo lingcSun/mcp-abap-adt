@@ -4,14 +4,23 @@ This server preserves 127 existing SAP ABAP tools and adds `readResultPage` for 
 
 ## Installation and protocol
 
-Use Node22.22.2+ or24.15.0+. Run `npm ci` and `npm run build`, then configure your MCP client to launch `node` with the absolute path to `dist/index.js`. Existing npm/registry releases do not contain this PR until the owner releases it. No release is published here.
+Published on npm as [`@lingc-sun/mcp-abap-adt`](https://www.npmjs.com/package/@lingc-sun/mcp-abap-adt). Requires Node.js 22.22.2+ or 24.15.0+.
+
+```sh
+npx -y @lingc-sun/mcp-abap-adt          # run on demand, no install step
+npm install -g @lingc-sun/mcp-abap-adt  # or install globally; provides the `mcp-abap-adt` binary
+```
+
+To build from source instead, run `npm ci` and `npm run build` in this repo and point your client at the absolute path to `dist/index.js`.
+
+Configure your MCP client to launch it via npx and pass the SAP credentials in `env`:
 
 ```json
 {
   "mcpServers": {
     "abap-adt": {
-      "command": "node",
-      "args": ["/absolute/path/to/this/repo/dist/index.js"],
+      "command": "npx",
+      "args": ["-y", "@lingc-sun/mcp-abap-adt"],
       "env": {
         "SAP_URL": "https://sap.example.invalid:44300",
         "SAP_USER": "YOUR_USER",
@@ -24,9 +33,27 @@ Use Node22.22.2+ or24.15.0+. Run `npm ci` and `npm run build`, then configure yo
 }
 ```
 
+### Configuration
+
+Environment comes from the MCP client. Only `SAP_URL` and `SAP_USER` are required (plus one of `SAP_PASSWORD` / `SAP_BEARER_TOKEN`); everything else is optional.
+
+| Variable | Required | Description |
+| --- | --- | --- |
+| `SAP_URL` | yes | SAP origin (scheme, host, port), e.g. `https://host:44300`. No path, query or embedded credentials. HTTPS enforced unless `SAP_ALLOW_HTTP=1`. |
+| `SAP_USER` | yes | SAP logon user; its SAP authorizations bound what the session can do. |
+| `SAP_PASSWORD` | if no token | SAP password. Omit when using `SAP_BEARER_TOKEN`. |
+| `SAP_BEARER_TOKEN` | no | Broker-issued bearer token replacing the password. Rotate by restarting the process. |
+| `SAP_CLIENT` | no | SAP client number, e.g. `100`. |
+| `SAP_LANGUAGE` | no | Logon language, e.g. `EN`. |
+| `SAP_REQUEST_TIMEOUT_MS` | no | Per-operation budget in milliseconds; accepts 100..120000, default 60000. Covers login and every underlying HTTP request. |
+| `SAP_ENV_FILE` | no | Explicit path to a dotenv file. Dotenv loads only when this variable names a file. |
+| `SAP_LOG_LEVEL` | no | Set to `debug` to emit JSON log lines on stderr. |
+| `SAP_ALLOW_HTTP` | no | Set to `1` to permit a trusted private HTTP origin. Exposes credentials to that network. |
+| `NODE_EXTRA_CA_CERTS` | no | Absolute path to a trusted private CA bundle. Set before Node starts; TLS verification stays enabled. |
+
 Public TypeScript MCP2.0.0 supports modern2026-07-28 discovery and legacy2025-11-25 initialization, validated tools, cancellation and proper errors. This package exposes stdio; it is not an HTTP listener or MCP OAuth provider. Missing credentials still allow discovery. `healthcheck` reports local configuration and session recovery state, not verified SAP connectivity.
 
-Environment comes from the MCP client. Dotenv loads only when `SAP_ENV_FILE` explicitly names a file. `SAP_URL` is an origin without a path, query or embedded credentials. For a private CA set `NODE_EXTRA_CA_CERTS` before launching Node. TLS verification cannot be disabled. Loopback HTTP is allowed for fixtures; a trusted private HTTP deployment requires `SAP_ALLOW_HTTP=1` and exposes credentials to that network.
+TLS verification cannot be disabled. Loopback HTTP is allowed for fixtures; a trusted private HTTP deployment requires `SAP_ALLOW_HTTP=1` and exposes credentials to that network.
 
 An authorized broker's static `SAP_BEARER_TOKEN` can replace the password. Rotate it by restarting the process; this does not implement XSUAA grants or prove tenant acceptance. No password-grant flow is introduced.
 
@@ -157,7 +184,7 @@ When working with ABAP objects, you may encounter errors related to unknown fiel
 
 ## Troubleshooting
 
-- **`npx` can't find the package / client won't start it:** ensure Node.js is installed and on your PATH (`node -v`, `npm -v`). On Windows try `"command": "npx.cmd"`, or use a source build with an absolute path to `node dist/index.js`.
+- **`npx` can't find the package / client won't start it:** ensure Node.js is installed and on your PATH (`node -v`, `npm -v`). On Windows try `"command": "npx.cmd"`, or install globally with `npm i -g @lingc-sun/mcp-abap-adt` and set `"command": "mcp-abap-adt"`. A source build with an absolute path to `node dist/index.js` also works.
 - **SAP connection errors:** verify your credentials (`SAP_URL`, `SAP_USER`, `SAP_PASSWORD`, `SAP_CLIENT`), confirm the system is reachable, that your user has ADT authorizations, and that `/sap/bc/adt` is active in `SICF`.
 - **TLS / self-signed certificate errors:** configure `NODE_EXTRA_CA_CERTS` with the absolute path to a trusted CA certificate before Node starts. Verification stays enabled.
 
